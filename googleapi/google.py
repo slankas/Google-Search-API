@@ -9,7 +9,7 @@ from .modules import standard_search
 
 __author__ = "Anthony Casagrande <birdapi@gmail.com>, " + \
     "Agustin Benassi <agusbenassi@gmail.com>"
-__version__ = "1.1.0"
+__version__ = "1.1.14.1"
 
 
 """Defines the public inteface of the API."""

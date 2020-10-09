@@ -16,11 +16,11 @@ with open("test_requirements.txt") as f:
     test_requirements = [req.strip() for req in f.readlines()]
 
 setup(name='Google-Search-API',
-      version='1.1.14',
-      url='https://github.com/abenassi/Google-Search-API',
+      version='1.1.14.1',
+      url='https://github.com/slankas/Google-Search-API',
       description='Search in google',
-      author='Anthony Casagrande, Agustin Benassi',
-      author_email='birdapi@gmail.com, agusbenassi@gmail.com',
+      author='Anthony Casagrande, Agustin Benassi, John Slankas',
+      author_email='birdapi@gmail.com, agusbenassi@gmail.com, slankas@gmail.com',
       maintainer="Agustin Benassi",
       maintainer_email='agusbenassi@gmail.com',
       license='MIT',
