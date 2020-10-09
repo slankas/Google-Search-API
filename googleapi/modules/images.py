@@ -17,7 +17,7 @@ import shutil
 import os
 import threading
 import queue
-
+import json
 
 IMAGE_FORMATS = ["bmp", "gif", "jpg", "png", "psd", "pspimage", "thm",
                  "tif", "yuv", "ai", "drw", "eps", "ps", "svg", "tiff",
@@ -244,6 +244,9 @@ class ImageResult(object):
         if not os.path.isdir(path):
             os.mkdir(path)
 
+    def toJson(self):
+        """allow the object to be serialized to a JSON object"""
+        return json.dumps(vars(self))
 
 # PRIVATE
 def _parse_image_format(image_link):

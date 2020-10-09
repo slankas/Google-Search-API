@@ -9,7 +9,7 @@ from .utils import get_html, normalize_query
 from bs4 import BeautifulSoup
 import re
 from unidecode import unidecode
-
+import json
 
 class ShoppingResult(object):
 
@@ -27,7 +27,10 @@ class ShoppingResult(object):
 
     def __repr__(self):
         return unidecode(self.name)
-
+        
+    def toJson(self):
+        """allow the object to be serialized to a JSON object"""
+        return json.dumps(vars(self))
 
 def shopping(query, pages=1):
     results = []

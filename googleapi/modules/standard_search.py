@@ -11,7 +11,7 @@ import urllib.parse
 from urllib.parse import unquote, parse_qs, urlparse
 from unidecode import unidecode
 from re import match, findall
-
+import json
 
 class GoogleResult(object):
 
@@ -51,6 +51,9 @@ class GoogleResult(object):
         else:
             return unidecode(str_element)
 
+    def toJson(self):
+        """allow the object to be serialized to a JSON object"""
+        return json.dumps(vars(self))
 
 # PUBLIC
 def search(query, pages=1, lang='en', area='com', ncr=False, void=True, time_period=False, sort_by_date=False, first_page=0):
