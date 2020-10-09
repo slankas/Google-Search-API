@@ -18,7 +18,8 @@ class GoogleResult(object):
     """Represents a google search result."""
 
     def __init__(self):
-        self.name = None  # The title of the link
+        self.name = None  # The title of the link - includes extra text
+        self.title = None # The proper title of the link
         self.link = None  # The external link
         self.google_link = None  # The google link
         self.description = None  # The description of the link
@@ -28,7 +29,7 @@ class GoogleResult(object):
         self.index = None  # What index on this page it was on
         self.number_of_results = None # The total number of results the query returned
         self.is_pdf = None # This boolean is true if google thinks this result leads to a PDF file
-        
+
     def __repr__(self):
         name = self._limit_str_size(self.name, 55)
         description = self._limit_str_size(self.description, 49)
@@ -85,6 +86,7 @@ def search(query, pages=1, lang='en', area='com', ncr=False, void=True, time_per
                 res.index = j
 
                 res.name = _get_name(li)
+                res.title = _get_title(li)
                 res.link = _get_link(li)
                 res.google_link = _get_google_link(li)
                 res.description = _get_description(li)
@@ -92,7 +94,7 @@ def search(query, pages=1, lang='en', area='com', ncr=False, void=True, time_per
                 res.cached = _get_cached(li)
                 res.number_of_results = number_of_results
                 res.is_pdf = _get_is_pdf(li)
-                
+
                 if void is True:
                     if res.description is None:
                         continue
@@ -110,6 +112,13 @@ def _get_name(li):
         return a.text.strip()
     return None
 
+def _get_title(li):
+    """Return the title of a google search."""
+    a = li.select_one("h3 > span")
+    # return a.text.encode("utf-8").strip()
+    if a is not None:
+        return a.text.strip()
+    return None
 
 def _filter_link(link):
     '''Filter links found in the Google result pages HTML code.
@@ -216,7 +225,7 @@ def _get_is_pdf(li):
     """Return if the link is marked by google as PDF"""
     sdiv = li.find("span", attrs={"class": "ZGwO7 C0kchf NaCKVc"})
     return True if sdiv else False
-    
+
 def _get_number_of_results(results_div):
     """Return the total number of results of the google search.
     Note that the returned value will be the same for all the GoogleResult
