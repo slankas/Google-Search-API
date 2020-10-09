@@ -6,7 +6,6 @@ from unidecode import unidecode
 from .utils import get_html_from_dynamic_site
 from .utils import _get_search_url
 from bs4 import BeautifulSoup
-import json
 
 class CalculatorResult(object):
 
@@ -29,9 +28,6 @@ class CalculatorResult(object):
     def __repr__(self):
         return unidecode(self.value)
 
-    def toJson(self):
-        """allow the object to be serialized to a JSON object"""
-        return json.dumps(vars(self))
 
 # PUBLIC
 def calculate(expr):
